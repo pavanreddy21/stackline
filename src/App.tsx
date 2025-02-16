@@ -1,24 +1,31 @@
+// src/App.tsx
+
 import React from 'react';
-import logo from './logo.svg';
+import { productData, ProductData } from './data';
+import ProductDetails from './components/ProductDetails';
+import SalesChart from './components/SalesChart';
+import SalesTable from './components/SalesTable';
 import './App.css';
 
 function App() {
+  // In a real app, you'd fetch this data from an API
+  const data: ProductData = productData[0]; // We only have one product
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="app-container">
+      <header className='app-header'>
+        <h1 className="app-title">Stackline</h1>
       </header>
+      <div className="content">
+        <aside className="sidebar">
+          <ProductDetails product={data} />
+        </aside>
+        <main className="main-content">
+            <h2>Retail Sales</h2>
+          <SalesChart salesData={data.sales} />
+          <SalesTable salesData={data.sales} />
+        </main>
+      </div>
     </div>
   );
 }
